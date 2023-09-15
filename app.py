@@ -47,7 +47,5 @@ def set_up_jwt():
     jwt = JWTManager(app)
 
 
-if __name__ == "__main__":
-    set_mongo_client()
-    set_up_jwt()
-    app.run(debug=True)
+set_mongo_client()
+set_up_jwt()
