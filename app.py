@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from flask import Flask
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 
 import mongoengine
 
@@ -16,7 +17,9 @@ from resources.user import User
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app, prefix="/api")
+
 
 api.add_resource(Home, "/", endpoint="home")
 api.add_resource(Login, "/login", endpoint="login")

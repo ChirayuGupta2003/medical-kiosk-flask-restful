@@ -15,24 +15,31 @@ class Register(BaseResource):
         name = data.get("name")
         email = data.get("email")
         password = data.get("password")
-        dob = data.get("dob")
-        phone = data.get("phone")
-        gender = data.get("gender")
-        medications = data.get("medications")
+        # dob = data.get("dob")
+        # phone = data.get("phone")
+        # gender = data.get("gender")
+        # medications = data.get("medications")
 
-        dob = datetime.datetime.strptime(dob, "%d/%M/%Y")
+        # if dob:
+        #     dob = datetime.datetime.strptime(dob, "%d/%M/%Y")
+
+        if not (name or email or password):
+            return {"error": "name, email and password required"}, 400
 
         hashed_password = bcrypt.hashpw(
             password.encode("utf-8"), bcrypt.gensalt())
 
-        user = User(name=name, email=email,
-                    password=hashed_password.decode("utf-8"), dob=dob, phone=phone, gender=gender)
+        # user = User(name=name, email=email,
+        #             password=hashed_password.decode("utf-8"), dob=dob, phone=phone, gender=gender)
 
-        if medications:
-            print(medications)
-            for medication in medications:
-                user.medications.append(Medication(
-                    name=medication["name"], time=medication["time"], duration=medication["duration"]))
+        user = User(name=name, email=email,
+                    password=hashed_password.decode("utf-8"))
+
+        # if medications:
+        #     print(medications)
+        #     for medication in medications:
+        #         user.medications.append(Medication(
+        #             name=medication["name"], time=medication["time"], duration=medication["duration"]))
 
         if not email or not password:
             return {"error": "email and password required"}, 400
