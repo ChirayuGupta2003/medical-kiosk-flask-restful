@@ -14,12 +14,14 @@ class Login(BaseResource):
         email = data.get("email")
         password = data.get("password")
 
+        print(email, password)
+
         user_document = User.objects(email=email).first()
 
         if user_document and bcrypt.checkpw(password.encode("utf-8"), user_document["password"].encode("utf-8")):
             access_token = create_access_token(
                 identity=email, expires_delta=datetime.timedelta(days=1))
 
-            return {"access-token": access_token}
+            return {"token": access_token}
 
         return {"error": "Invalid username or password"}

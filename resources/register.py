@@ -52,4 +52,4 @@ class Register(BaseResource):
 
         user.save()
 
-        return {"access-token": access_token}
+        return {"token": access_token}
