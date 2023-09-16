@@ -14,4 +14,10 @@ class User(BaseResource):
 
         user = json.loads(user.to_json())
 
+        # for idx, obj in enumerate(user):
+        #     print(idx, obj)
+
+        del user["password"]
+        del user["_id"]
+        
         return {"user": user}
