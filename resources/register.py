@@ -48,7 +48,7 @@ class Register(BaseResource):
             return {"error": "email already exists"}, 400
 
         access_token = create_access_token(
-            identity=email, expires_delta=datetime.timedelta(days=1))
+            identity={"email": email, "name": name}, expires_delta=datetime.timedelta(days=1))
 
         user.save()
 
